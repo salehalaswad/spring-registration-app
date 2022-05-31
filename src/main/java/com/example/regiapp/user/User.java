@@ -16,37 +16,37 @@ import java.util.Collections;
 @Getter
 @Setter
 @EqualsAndHashCode
-@NoArgsConstructor
+//@NoArgsConstructor
+
 @Entity
 public class User implements UserDetails {
     @Id
-    @SequenceGenerator(
-            name = "student_sequence",
-            sequenceName = "student_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
+            strategy = GenerationType.TABLE
     )
+//    @SequenceGenerator(
+//            name = "student_se",
+//            sequenceName = "student_seq",
+//            allocationSize = 1
+//    )
+  //  @Column(name = "id", updatable = false, nullable = false)
     private Long id;
-    private String name;
-    private String username;
+    private String firstName;
+    private String lastName;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     private Boolean locked;
     private Boolean enabled;
-
-    public User(String name, String username, String email, String password, UserRole userRole, Boolean locked, Boolean enabled) {
-        this.name = name;
-        this.username = username;
+public User(){}
+    public User(String firstName, String lastName, String email, String password, UserRole userRole
+                ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.userRole = userRole;
-        this.locked = locked;
-        this.enabled = enabled;
+        this.userRole = UserRole.USER;
     }
 
     @Override
@@ -60,9 +60,13 @@ public class User implements UserDetails {
         return password;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

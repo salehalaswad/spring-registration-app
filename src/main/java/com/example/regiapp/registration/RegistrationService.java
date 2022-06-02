@@ -7,9 +7,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-//@AllArgsConstructor
-public record RegistrationService(UserService userService,
-                                  EmailValidator emailValidator) {
+@AllArgsConstructor
+public class RegistrationService {
+    private UserService userService;
+    private EmailValidator emailValidator;
+
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {

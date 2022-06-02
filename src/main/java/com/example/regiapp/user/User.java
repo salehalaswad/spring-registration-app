@@ -30,8 +30,8 @@ public class User implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-    private Boolean locked;
-    private Boolean enabled;
+    private Boolean locked=false;
+    private Boolean enabled=false; // email confirmed
 
     public User(String firstName, String lastName, String email, String password, UserRole userRole) {
         this.firstName = firstName;
@@ -39,8 +39,6 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.userRole = userRole;
-        this.locked = true;
-        this.enabled = true;
     }
 
     @Override
